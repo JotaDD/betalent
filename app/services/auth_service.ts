@@ -15,6 +15,16 @@ export default class AuthService {
     )
     return token
   }
+  async verifyToken(token: string) {
+    try {
+      const decoded = jwt.verify(token, process.env.APP_KEY as string)
+      return decoded
+    } catch (error) {
+      return null
+    }
+  }
+
+
 
 
 }
