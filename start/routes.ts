@@ -7,10 +7,32 @@
 |
 */
 
+import AuthController from '#controllers/auth_controller'
 import router from '@adonisjs/core/services/router'
 
-router.get('/', async () => { 
+router.get('/', async () => {
   return {
     hello: 'world',
   }
 })
+
+// User Routes
+router.post('/signup', [AuthController, 'signup'])
+router.post('/login', [AuthController, 'login'])
+
+// Product Routes
+router.get('products/', () => { })
+router.get('products/:id', () => { })
+router.post('products/store', () => { })
+router.put('products/:id', () => { })
+router.delete('products/:id', () => { })
+
+// Customer Routes
+router.get('customers', () => { })
+router.get('customers/:id', () => { })
+router.post('customers', () => { })
+router.put('customers/:id', () => { })
+router.delete('customers/:id', () => { })
+
+// Orders Route
+router.get('orders/store', () => { })
