@@ -15,6 +15,8 @@ export default class extends BaseSchema {
 
       table.float('price').notNullable().defaultTo(0)
 
+      table.boolean('is_active').notNullable().defaultTo(true)
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

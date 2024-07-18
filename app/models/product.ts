@@ -17,6 +17,9 @@ export default class Product extends BaseModel {
   @column()
   declare price: number
 
+  @column({ columnName: 'is_active' })
+  declare isActive: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
