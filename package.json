@@ -41,6 +41,7 @@
     "@japa/plugin-adonisjs": "^3.0.1",
     "@japa/runner": "^3.1.4",
     "@swc/core": "^1.6.5",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.14.9",
     "eslint": "^8.57.0",
@@ -56,6 +57,7 @@
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^21.1.0",
     "@vinejs/vine": "^2.1.0",
+    "jsonwebtoken": "^9.0.2",
     "luxon": "^3.4.4",
     "mysql2": "^3.10.3",
     "reflect-metadata": "^0.2.2"
