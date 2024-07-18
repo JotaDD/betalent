@@ -15,16 +15,19 @@ export default class AuthService {
     )
     return token
   }
+
   async verifyToken(token: string) {
     try {
-      const decoded = jwt.verify(token, process.env.APP_KEY as string)
-      return decoded
+      const verified = jwt.verify(token, process.env.APP_KEY as string)
+      return verified
     } catch (error) {
       return null
     }
   }
 
-
-
-
+  async validatePassword(email: string, password: string) {
+    const user = await User.findByOrFail('email', email)
+    const isValid = await hash.verify(user.password, password)
+    return isValid
+  }
 }
