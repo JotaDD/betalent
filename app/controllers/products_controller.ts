@@ -45,7 +45,7 @@ export default class ProductsController {
     const data = await request.validateUsing(productValidator)
     const product = await this.productService.update(id, data)
     return response.status(ResponseStatus.Ok).json({
-      message: 'Product updated successfully',
+      message: 'Product updated successfully!',
       data: product
     })
   }
@@ -57,7 +57,7 @@ export default class ProductsController {
     const { id } = params
     await this.productService.delete(id)
     return {
-      message: 'Product deleted successfully'
+      message: 'Product deleted successfully!'
     }
   }
 }
