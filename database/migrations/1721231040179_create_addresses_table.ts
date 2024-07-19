@@ -7,22 +7,19 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       
-      table.string('rua',254).notNullable()
+      table.string('street',254).notNullable()
 
-      table.string('numero',20).notNullable()
+      table.string('number',20).notNullable()
 
-      table.string('complemento',50)
+      table.string('complement',50)
 
-      table.string('bairro',50).notNullable()
+      table.string('neighborhood',50).notNullable()
 
-      table.string('cidade',50).notNullable() 
+      table.string('city',50).notNullable() 
 
-      table.string('estado',2).notNullable()
+      table.string('state',2).notNullable()
 
       table.string('cep',20).notNullable()
-
-      table.integer('customer_id').unsigned().references('customers.id')
-
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

@@ -11,6 +11,10 @@ export default class extends BaseSchema {
 
       table.string('cpf', 14).notNullable().unique()
 
+      table.integer('address_id').unsigned().references('addresses.id').onDelete('CASCADE')
+      
+      table.integer('phone_id').unsigned().references('phones.id').onDelete('CASCADE')
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

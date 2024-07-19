@@ -9,8 +9,6 @@ export default class extends BaseSchema {
 
       table.string('number', 30).notNullable()
 
-      table.integer('customer_id').unsigned().references('customers.id')
-
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
