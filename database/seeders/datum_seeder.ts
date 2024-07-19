@@ -18,11 +18,11 @@ export default class extends BaseSeeder {
 
     await Product.createMany(productsSeed)
 
-    await Customer.createMany(customersSeed)
-
     await Address.createMany(addressesSeed)
-
+    
     await Phone.createMany(phonesSeed)
+    
+    await Customer.createMany(customersSeed)
 
     await Order.createMany(ordersSeed)
 
