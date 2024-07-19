@@ -19,6 +19,4 @@ export default class CreateProductDto {
     product.isActive = data.isActive ?? true
     return product
   }
-
-
 }

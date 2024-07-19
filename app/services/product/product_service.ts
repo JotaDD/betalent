@@ -1,5 +1,6 @@
 import CreateProductDto from "#controllers/dto/create_product_dto";
 import ProductDto from "#controllers/dto/product_dto";
+import UpdateProductDto from "#controllers/dto/update_product_dto";
 import Product from "#models/product";
 
 export default class ProductService {
@@ -48,6 +49,15 @@ export default class ProductService {
     const product = await Product.findByOrFail({ id })
     return product
   }
+
+  async update(id: string, data: UpdateProductDto) {
+    const product = await Product.findByOrFail({ id })
+    product.merge(data)
+    await product.save()
+    return product
+  }
+
+
 
 
 }
