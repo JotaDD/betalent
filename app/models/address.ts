@@ -1,33 +1,31 @@
-import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
-
+import Customer from '#models/customer';
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm';
+import type { HasMany } from '@adonisjs/lucid/types/relations';
+import { DateTime } from 'luxon';
 export default class Address extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare rua: string
+  declare street: string
 
   @column()
-  declare numero: string
+  declare number: string
 
   @column()
-  declare complemento: string
+  declare complement: string
 
   @column()
-  declare bairro: string
+  declare neighborhood: string
 
   @column()
-  declare cidade: string
+  declare city: string
 
   @column()
-  declare estado: string
-  
+  declare state: string
+
   @column()
   declare cep: string
-
-  @column({ columnName: 'customer_id' })
-  declare customerId: number
 
 
   @column.dateTime({ autoCreate: true })
@@ -35,4 +33,10 @@ export default class Address extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasMany(() => Customer, {
+    localKey: 'id',
+    foreignKey: 'addressId'
+  })
+  declare customers: HasMany<typeof Customer>
 }

@@ -1,5 +1,7 @@
+import Customer from '#models/customer'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Phone extends BaseModel {
   @column({ isPrimary: true })
@@ -8,7 +10,7 @@ export default class Phone extends BaseModel {
   @column()
   declare number: string
 
-  @column({columnName: 'customer_id'})
+  @column({ columnName: 'customer_id' })
   declare customerId: number
 
   @column.dateTime({ autoCreate: true })
@@ -16,4 +18,10 @@ export default class Phone extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasMany(() => Customer, {
+    localKey: 'id',
+    foreignKey: 'phoneId'
+  })
+  declare customer: HasMany<typeof Customer>
 }
