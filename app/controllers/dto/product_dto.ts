@@ -19,5 +19,5 @@ export default class ProductDto {
       product.description
     );
   }
-  
+
 }
