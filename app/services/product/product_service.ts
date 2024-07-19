@@ -44,5 +44,10 @@ export default class ProductService {
     return response
   }
 
+  async getById(id: string) {
+    const product = await Product.findByOrFail({ id })
+    return product
+  }
+
 
 }
