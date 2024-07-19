@@ -1,6 +1,6 @@
-import CreateProductDto from "#controllers/dto/create_product_dto";
-import ProductDto from "#controllers/dto/product_dto";
-import UpdateProductDto from "#controllers/dto/update_product_dto";
+import CreateProductDto from "#controllers/dto/product/create_product_dto";
+import ProductDto from "#controllers/dto/product/product_dto";
+import UpdateProductDto from "#controllers/dto/product/update_product_dto";
 import Product from "#models/product";
 
 export default class ProductService {
@@ -45,19 +45,19 @@ export default class ProductService {
     return response
   }
 
-  async getById(id: string) {
+  async getById(id: string): Promise<ProductDto> {
     const product = await Product.findByOrFail({ id })
     return product
   }
 
-  async update(id: string, data: UpdateProductDto) {
+  async update(id: string, data: UpdateProductDto): Promise<ProductDto> {
     const product = await Product.findByOrFail({ id })
     product.merge(data)
     await product.save()
     return product
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<void> {
     const product = await Product.findByOrFail({ id })
     product.merge({ isActive: false })
     await product.save()
