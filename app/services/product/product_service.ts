@@ -57,7 +57,11 @@ export default class ProductService {
     return product
   }
 
-
+  async delete(id: string) {
+    const product = await Product.findByOrFail({ id })
+    product.merge({ isActive: false })
+    await product.save()
+  }
 
 
 }
