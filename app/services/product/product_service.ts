@@ -34,6 +34,15 @@ export default class ProductService {
     return response
   }
 
+  async create(data: CreateProductDto): Promise<ProductDto> {
+    const product = CreateProductDto.toModel(data)
+
+    const createdProduct = await Product.create(product)
+
+    const response = ProductDto.fromModel(createdProduct)
+
+    return response
+  }
 
 
 }
