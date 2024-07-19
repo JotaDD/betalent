@@ -8,6 +8,7 @@
 */
 
 import AuthController from '#controllers/auth_controller'
+import CustomersController from '#controllers/customers_controller'
 import ProductsController from '#controllers/products_controller'
 import router from '@adonisjs/core/services/router'
 
@@ -30,7 +31,7 @@ router.put('products/:id', [ProductsController, 'update'])
 router.delete('products/:id', [ProductsController, 'delete'])
 
 // Customer Routes
-router.get('customers', () => { })
+router.get('customers', [CustomersController, 'index'])
 router.get('customers/:id', () => { })
 router.post('customers', () => { })
 router.put('customers/:id', () => { })
