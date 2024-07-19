@@ -1,4 +1,5 @@
 import ProductService from '#services/product/product_service'
+import { productValidator } from '#validators/product'
 import { inject } from '@adonisjs/core'
 import { ResponseStatus, type HttpContext } from '@adonisjs/core/http'
 
@@ -13,15 +14,31 @@ export default class ProductsController {
     return response.status(ResponseStatus.Ok).json(products)
   }
 
+  async active({ response }: HttpContext) {
+    const products = await this.productService.getAllActive()
+    return response.status(ResponseStatus.Ok).json(products)
+  }
+
   /**
    * Display form to create a new record
    */
-  async create({ }: HttpContext) { }
+  // async create({ request, response }: HttpContext) {
+  //   const data = await request.validateUsing(productValidator)
+  //   console.log(data)
+  //   const product = await this.productService.create(data)
+  //   return response.status(ResponseStatus.Created).json(product)
+  // }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) { }
+  async store({ request, response }: HttpContext) {
+    const data = await request.validateUsing(productValidator)
+    console.log(data)
+    const product = await this.productService.create(data)
+    return response.status(ResponseStatus.Created).json(product)
+  }
+
 
   /**
    * Show individual record
