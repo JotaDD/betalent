@@ -17,6 +17,20 @@ const productsSeed = [
     description: 'Description 3',
     price: 300.00,
   },
+  {
+    name: 'ar condicionado',
+    quantity: 30,
+    description: 'Description 4',
+    price: 300.00,
+  },
+  {
+    name: 'Product 5',
+    quantity: 30,
+    description: 'Description 5',
+    price: 300.00,
+    isActive: false
+  },
+
 ];
 
 export default productsSeed;
