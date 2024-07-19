@@ -8,6 +8,7 @@
 */
 
 import AuthController from '#controllers/auth_controller'
+import ProductsController from '#controllers/products_controller'
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
@@ -21,7 +22,7 @@ router.post('/signup', [AuthController, 'signup'])
 router.post('/login', [AuthController, 'login'])
 
 // Product Routes
-router.get('products/', () => { })
+router.get('products/', [ProductsController, 'index'])
 router.get('products/:id', () => { })
 router.post('products/store', () => { })
 router.put('products/:id', () => { })
