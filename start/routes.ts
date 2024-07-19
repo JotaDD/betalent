@@ -24,7 +24,7 @@ router.post('/login', [AuthController, 'login'])
 // Product Routes
 router.get('products', [ProductsController, 'index'])
 router.get('products/active', [ProductsController, 'active'])
-router.get('products/:id', () => { })
+router.get('products/:id', [ProductsController, 'show'])
 router.post('products', [ProductsController, 'store'])
 router.put('products/:id', () => { })
 router.delete('products/:id', () => { })
