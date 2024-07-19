@@ -40,10 +40,24 @@ export default class ProductsController {
   /**
    * Handle form submission for the edit action
    */
-  // async update({ params, request }: HttpContext) { }
+  async update({ params, request, response }: HttpContext) {
+    const { id } = params
+    const data = await request.validateUsing(productValidator)
+    const product = await this.productService.update(id, data)
+    return response.status(ResponseStatus.Ok).json({
+      message: 'Product updated successfully',
+      data: product
+    })
+  }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async delete({ params }: HttpContext) {
+    const { id } = params
+    await this.productService.delete(id)
+    return {
+      message: 'Product deleted successfully'
+    }
+  }
 }
