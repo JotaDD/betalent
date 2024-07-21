@@ -1,4 +1,3 @@
-
 const phonesSeed = [
   {
     number: '5518998888888',
@@ -11,7 +10,7 @@ const phonesSeed = [
   },
   {
     number: '5518997112233',
-  }
+  },
 ]
 
-export default phonesSeed;
+export default phonesSeed

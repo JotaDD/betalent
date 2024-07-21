@@ -28,4 +28,4 @@ const addressesSeed = [
   },
 ]
 
-export default addressesSeed;
+export default addressesSeed

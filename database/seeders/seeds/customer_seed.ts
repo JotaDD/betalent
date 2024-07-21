@@ -17,6 +17,6 @@ const customersSeed = [
     phoneId: 3,
     addressId: 3,
   },
-];
+]
 
-export default customersSeed;
+export default customersSeed

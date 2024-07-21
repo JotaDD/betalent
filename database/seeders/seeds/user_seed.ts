@@ -1,6 +1,6 @@
 const userSeed = {
   email: 'johnny@test.com',
-  password: 'password'
+  password: 'password',
 }
 
 export default userSeed
