@@ -7,16 +7,13 @@
 |
 */
 
-import AuthController from '#controllers/auth_controller'
-import CustomersController from '#controllers/customers_controller'
-import ProductsController from '#controllers/products_controller'
+const AuthController = () => import('#controllers/auth_controller')
+const CustomersController = () => import('#controllers/customers_controller')
+const OrdersController = () => import('#controllers/orders_controller')
+const ProductsController = () => import('#controllers/products_controller')
 import router from '@adonisjs/core/services/router'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
+router.get('/', [OrdersController, 'index'])
 
 // User Routes
 router.post('/signup', [AuthController, 'signup'])
@@ -32,10 +29,10 @@ router.delete('products/:id', [ProductsController, 'delete'])
 
 // Customer Routes
 router.get('customers', [CustomersController, 'index'])
-router.get('customers/:id', () => { })
-router.post('customers', () => { })
-router.put('customers/:id', () => { })
-router.delete('customers/:id', () => { })
+router.get('customers/:id', [CustomersController, 'show'])
+router.post('customers', [CustomersController, 'store'])
+router.put('customers/:id', [CustomersController, 'update'])
+router.delete('customers/:id', [CustomersController, 'delete'])
 
 // Orders Route
-router.get('orders/store', () => { })
+router.get('orders/store', () => {})
