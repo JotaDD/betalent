@@ -1,67 +1,44 @@
-import CreateProductDto from "#controllers/dto/product/create_product_dto";
-import ProductDto from "#controllers/dto/product/product_dto";
-import UpdateProductDto from "#controllers/dto/product/update_product_dto";
-import Product from "#models/product";
+import { CreateProduct, UpdateProduct } from '#interfaces/product_interface'
+import Product from '#models/product'
 
+interface ActiveOnly {
+  activeOnly?: boolean
+}
 export default class ProductService {
+  private static readonly productFields = ['id', 'name', 'quantity', 'price', 'description']
 
-  private sortAlphabeticallyByName(products: Product[]) {
-    return products.sort((a, b) => {
-      return a.name.localeCompare(b.name)
-    })
+  private readonly getAllProductsQuery = Product.query()
+    .select(ProductService.productFields)
+    .orderBy('name', 'asc')
+
+  async getAll({ activeOnly }: ActiveOnly): Promise<Product[]> {
+    if (activeOnly) {
+      const activeProducts = await this.getAllProductsQuery.where('isActive', '1')
+      return activeProducts
+    }
+    const allProducts = await this.getAllProductsQuery
+    return allProducts
   }
 
-  async getAll(): Promise<ProductDto[]> {
-    const products = await Product.all()
-
-    const sortedProducts = this.sortAlphabeticallyByName(products)
-
-    const response = sortedProducts.map((product) => {
-      return ProductDto.fromModel(product)
-    })
-
-    return response
+  async create(data: CreateProduct): Promise<Product> {
+    const createdProduct = await Product.create(data)
+    return createdProduct
   }
 
-  async getAllActive(): Promise<ProductDto[]> {
-    const products = await Product.findManyBy({ isActive: true })
-
-    const sortedProducts = this.sortAlphabeticallyByName(products)
-
-    const response = sortedProducts.map((product) => {
-      return ProductDto.fromModel(product)
-    })
-
-    return response
-  }
-
-  async create(data: CreateProductDto): Promise<ProductDto> {
-    const product = CreateProductDto.toModel(data)
-
-    const createdProduct = await Product.create(product)
-
-    const response = ProductDto.fromModel(createdProduct)
-
-    return response
-  }
-
-  async getById(id: string): Promise<ProductDto> {
+  async getById(id: string): Promise<Product> {
     const product = await Product.findByOrFail({ id })
     return product
   }
 
-  async update(id: string, data: UpdateProductDto): Promise<ProductDto> {
-    const product = await Product.findByOrFail({ id })
-    product.merge(data)
-    await product.save()
+  async update(id: string, data: UpdateProduct): Promise<Product> {
+    const product = await Product.findOrFail(id)
+    await product.merge(data).save()
+
     return product
   }
 
   async delete(id: string): Promise<void> {
     const product = await Product.findByOrFail({ id })
-    product.merge({ isActive: false })
-    await product.save()
+    await product.merge({ isActive: false }).save()
   }
-
-
 }
