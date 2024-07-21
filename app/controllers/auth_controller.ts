@@ -4,20 +4,19 @@ import UserService from '#services/user/user_service'
 import AuthService from '#services/auth_service'
 import { inject } from '@adonisjs/core'
 
-
 @inject()
 export default class AuthController {
   constructor(
     protected userService: UserService,
-    protected authService: AuthService,
-  ) { }
+    protected authService: AuthService
+  ) {}
 
   async signup({ request, response }: HttpContext) {
     const data = await request.validateUsing(registerValidator)
     await this.userService.create(data)
 
     return response.status(ResponseStatus.Created).json({
-      message: 'User created successfully'
+      message: 'User created successfully',
     })
   }
 
@@ -28,7 +27,7 @@ export default class AuthController {
 
     if (!isValid) {
       return response.status(ResponseStatus.Unauthorized).json({
-        message: 'Invalid credentials'
+        message: 'Invalid credentials',
       })
     }
 
@@ -36,11 +35,10 @@ export default class AuthController {
 
     if (!token) {
       return response.status(ResponseStatus.Unauthorized).json({
-        message: 'Invalid credentials'
+        message: 'Invalid credentials',
       })
     }
 
     return response.status(ResponseStatus.Ok).json({ token })
   }
-
 }

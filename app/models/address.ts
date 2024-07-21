@@ -1,7 +1,7 @@
-import Customer from '#models/customer';
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm';
-import type { HasMany } from '@adonisjs/lucid/types/relations';
-import { DateTime } from 'luxon';
+import Customer from '#models/customer'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { DateTime } from 'luxon'
 export default class Address extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
@@ -27,7 +27,6 @@ export default class Address extends BaseModel {
   @column()
   declare cep: string
 
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
@@ -36,7 +35,7 @@ export default class Address extends BaseModel {
 
   @hasMany(() => Customer, {
     localKey: 'id',
-    foreignKey: 'addressId'
+    foreignKey: 'addressId',
   })
   declare customers: HasMany<typeof Customer>
 }

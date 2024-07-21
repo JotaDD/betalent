@@ -1,8 +1,8 @@
-import Customer from '#models/customer';
-import Product from '#models/product';
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm';
-import type { BelongsTo } from '@adonisjs/lucid/types/relations';
-import { DateTime } from 'luxon';
+import Customer from '#models/customer'
+import Product from '#models/product'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { DateTime } from 'luxon'
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -22,7 +22,6 @@ export default class Order extends BaseModel {
 
   @column({ columnName: 'total_price' })
   declare totalPrice: number
-
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

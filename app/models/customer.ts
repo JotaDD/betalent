@@ -1,9 +1,8 @@
-import Address from '#models/address';
-import Phone from '#models/phone';
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm';
-import type { BelongsTo } from '@adonisjs/lucid/types/relations';
-import { DateTime } from 'luxon';
-
+import Address from '#models/address'
+import Phone from '#models/phone'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { DateTime } from 'luxon'
 
 export default class Customer extends BaseModel {
   @column({ isPrimary: true })
