@@ -10,9 +10,6 @@ export default class Phone extends BaseModel {
   @column()
   declare number: string
 
-  @column({ columnName: 'customer_id' })
-  declare customerId: number
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
@@ -21,7 +18,7 @@ export default class Phone extends BaseModel {
 
   @hasMany(() => Customer, {
     localKey: 'id',
-    foreignKey: 'phoneId'
+    foreignKey: 'phoneId',
   })
-  declare customer: HasMany<typeof Customer>
+  declare customers: HasMany<typeof Customer>
 }
