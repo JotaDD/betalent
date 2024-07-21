@@ -7,13 +7,12 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.string('number', 30).notNullable()
+      table.string('number', 20).notNullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
   }
-
   async down() {
     this.schema.dropTable(this.tableName)
   }
