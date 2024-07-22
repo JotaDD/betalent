@@ -6,7 +6,18 @@ export default interface OrderInterface {
   quantity: number
   unitPrice: number
   totalPrice: number
-  product: ProductInterface
+  product?: ProductInterface
 }
 
 export interface OrderResponse extends OrderInterface {}
+
+export interface CreateOrder {
+  customerId: string
+  productId: string
+  quantity: number
+  unitPrice?: number
+}
+
+export interface CreateOrderResponse extends OrderInterface {
+  totalPrice: number
+}

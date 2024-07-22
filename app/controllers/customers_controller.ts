@@ -1,4 +1,4 @@
-import CustomerService from '#services/customer/customer_service'
+import CustomerService from '#services/customer_service'
 import { customerValidator } from '#validators/customer'
 import { inject } from '@adonisjs/core'
 import { ResponseStatus, type HttpContext } from '@adonisjs/core/http'

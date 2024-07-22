@@ -16,3 +16,7 @@ export interface ProductInterface {
   created_at?: string
   updated_at?: string
 }
+
+export interface ProductResponse extends ProductInterface {}
+
+export interface CreateProductResponse extends ProductResponse {}

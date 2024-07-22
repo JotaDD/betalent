@@ -1,6 +1,7 @@
-import ProductService from '#services/product/product_service'
+import ProductService from '#services/product_service'
 import { createProductValidator, updateProductValidator } from '#validators/product'
 import { inject } from '@adonisjs/core'
+import { Exception } from '@adonisjs/core/exceptions'
 import { ResponseStatus, type HttpContext } from '@adonisjs/core/http'
 
 @inject()
@@ -18,9 +19,13 @@ export default class ProductsController {
   }
 
   async store({ request, response }: HttpContext) {
-    const data = await request.validateUsing(createProductValidator)
-    const product = await this.productService.create(data)
-    return response.status(ResponseStatus.Created).json(product)
+    try {
+      const data = await request.validateUsing(createProductValidator)
+      const product = await this.productService.create(data)
+      return response.status(ResponseStatus.Created).json(product)
+    } catch (error) {
+      throw new Exception('Failed to create product')
+    }
   }
 
   async show({ params, response }: HttpContext) {
@@ -29,9 +34,6 @@ export default class ProductsController {
     return response.status(ResponseStatus.Ok).json(product)
   }
 
-  /**
-   * Handle form submission for the edit action
-   */
   async update({ params, request, response }: HttpContext) {
     const { id } = params
     const data = await request.validateUsing(updateProductValidator)
@@ -40,9 +42,6 @@ export default class ProductsController {
     return response.status(ResponseStatus.Ok).json(product)
   }
 
-  /**
-   * Delete record
-   */
   async delete({ params, response }: HttpContext) {
     const { id } = params
     await this.productService.delete(id)

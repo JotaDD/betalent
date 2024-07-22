@@ -1,8 +1,9 @@
 import { loginValidator, registerValidator } from '#validators/auth'
 import { ResponseStatus, type HttpContext } from '@adonisjs/core/http'
-import UserService from '#services/user/user_service'
+import UserService from '#services/user_service'
 import AuthService from '#services/auth_service'
 import { inject } from '@adonisjs/core'
+import UnauthorizedException from '#exceptions/unauthorized_exception'
 
 @inject()
 export default class AuthController {
@@ -26,17 +27,13 @@ export default class AuthController {
     const isValid = await this.authService.validatePassword(email, password)
 
     if (!isValid) {
-      return response.status(ResponseStatus.Unauthorized).json({
-        message: 'Invalid credentials',
-      })
+      throw new UnauthorizedException()
     }
 
     const token = await this.authService.generateToken(email)
 
     if (!token) {
-      return response.status(ResponseStatus.Unauthorized).json({
-        message: 'Invalid credentials',
-      })
+      throw new UnauthorizedException()
     }
 
     return response.status(ResponseStatus.Ok).json({ token })

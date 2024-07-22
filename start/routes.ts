@@ -12,27 +12,26 @@ const CustomersController = () => import('#controllers/customers_controller')
 const OrdersController = () => import('#controllers/orders_controller')
 const ProductsController = () => import('#controllers/products_controller')
 import router from '@adonisjs/core/services/router'
-
-router.get('/', [OrdersController, 'index'])
+import { middleware } from './kernel.js'
 
 // User Routes
 router.post('/signup', [AuthController, 'signup'])
 router.post('/login', [AuthController, 'login'])
 
 // Product Routes
-router.get('products', [ProductsController, 'index'])
-router.get('products/active', [ProductsController, 'active'])
-router.get('products/:id', [ProductsController, 'show'])
-router.post('products', [ProductsController, 'store'])
-router.put('products/:id', [ProductsController, 'update'])
-router.delete('products/:id', [ProductsController, 'delete'])
+router.get('products', [ProductsController, 'index']).use(middleware.auth())
+router.get('products/active', [ProductsController, 'active']).use(middleware.auth())
+router.get('products/:id', [ProductsController, 'show']).use(middleware.auth())
+router.post('products', [ProductsController, 'store']).use(middleware.auth())
+router.put('products/:id', [ProductsController, 'update']).use(middleware.auth())
+router.delete('products/:id', [ProductsController, 'delete']).use(middleware.auth())
 
 // Customer Routes
-router.get('customers', [CustomersController, 'index'])
-router.get('customers/:id', [CustomersController, 'show'])
-router.post('customers', [CustomersController, 'store'])
-router.put('customers/:id', [CustomersController, 'update'])
-router.delete('customers/:id', [CustomersController, 'delete'])
+router.get('customers', [CustomersController, 'index']).use(middleware.auth())
+router.get('customers/:id', [CustomersController, 'show']).use(middleware.auth())
+router.post('customers', [CustomersController, 'store']).use(middleware.auth())
+router.put('customers/:id', [CustomersController, 'update']).use(middleware.auth())
+router.delete('customers/:id', [CustomersController, 'delete']).use(middleware.auth())
 
 // Orders Route
-router.get('orders/store', () => {})
+router.post('orders', [OrdersController, 'store']).use(middleware.auth())

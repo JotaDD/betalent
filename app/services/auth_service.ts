@@ -25,9 +25,13 @@ export default class AuthService {
     }
   }
 
-  async validatePassword(email: string, password: string) {
-    const user = await User.findByOrFail('email', email)
-    const isValid = await hash.verify(user.password, password)
-    return isValid
+  async validatePassword(email: string, password: string): Promise<boolean> {
+    try {
+      const user = await User.findByOrFail('email', email)
+      const isValid = await hash.verify(user.password, password)
+      return isValid
+    } catch (error) {
+      return false
+    }
   }
 }
